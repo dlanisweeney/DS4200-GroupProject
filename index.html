@@ -4,12 +4,81 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Visualizing Drug Overdoses in Connecticut</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+        section {
+            margin-bottom: 40px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #2c3e50;
+            border-bottom: 2px solid #e74c3c;
+            padding-bottom: 10px;
+        }
+        h3 {
+            color: #3498db;
+        }
+        .visualization-container {
+            margin: 20px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        a {
+            color: #2980b9;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        ul, ol {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+    </style>
 </head>
 <body>
     <header>
         <h1>Visualizing Drug Overdoses in Connecticut</h1>
-        <p>By Madeleine Jin, D'Lani Sweeney, & Olivia Simpson</p>
+        <p>By Madeleine Jin, Olivia Simpson, & D'Lani Sweeney</p>
     </header>
 
     <section>
@@ -38,7 +107,7 @@
                 </ul>
             </li>
         </ul>
-        <p>Data preprocessing will involve cleaning inconsistent entries, standardizing categorical variables (particularly for race and substance classifications), and creating derived features like age groups and temporal aggregates. We'll also geocode location data to enable spatial analysis.</p>
+        <p>Data preprocessing involved cleaning inconsistent entries, standardizing categorical variables (particularly for race and substance classifications), and creating derived features like age groups and temporal aggregates. We also geocoded location data to enable spatial analysis.</p>
     </section>
 
     <section>
@@ -95,6 +164,62 @@
             <li><strong>Temporal Trends:</strong> Acceleration of deaths post-2016 coinciding with fentanyl proliferation</li>
         </ul>
         <p>These insights will be presented through coordinated visualizations that allow users to explore the data from multiple perspectives while maintaining narrative coherence.</p>
+    </section>
+
+    <section id="heatmap-visualization">
+        <h2>Connecticut Overdose Heatmap Analysis</h2>
+        <div class="visualization-container">
+            <iframe src="interactive_connecticut_overdose_heatmap.html" width="100%" height="600" frameborder="0"></iframe>
+        </div>
+        
+        <div class="analysis">
+            <h3>Data Interpretation</h3>
+            <p>The interactive heatmap reveals stark geographical disparities in overdose fatalities across Connecticut counties from 2012-2023:</p>
+            <ul>
+                <li><strong>New Haven County</strong> leads with 2,901 deaths - 24.2% of statewide fatalities</li>
+                <li><strong>Hartford County</strong> follows closely with 2,652 deaths (22.1%)</li>
+                <li><strong>Fairfield County</strong> accounts for 1,564 deaths (13.1%)</li>
+                <li>The remaining five counties combined represent 40.6% of deaths</li>
+            </ul>
+            
+            <h3>Key Findings</h3>
+            <p>The visualization demonstrates three critical patterns:</p>
+            <ol>
+                <li><strong>Urban Concentration:</strong> 59.3% of deaths occur in the two most populated counties (New Haven and Hartford), suggesting correlation between population density and overdose incidence</li>
+                <li><strong>Regional Disparities:</strong> The southeast coastal region (New London) shows unexpectedly high rates given its population size</li>
+                <li><strong>Rural Emergence:</strong> While absolute numbers are lower, per capita rates in Windham and Litchfield counties indicate growing rural impacts</li>
+            </ol>
+            
+            <h3>Professional Applications</h3>
+            <p>This heatmap serves multiple stakeholders:</p>
+            <table class="stakeholder-table">
+                <tr>
+                    <th>Stakeholder</th>
+                    <th>Application</th>
+                </tr>
+                <tr>
+                    <td>Public Health Officials</td>
+                    <td>Target harm reduction resources to geographical hotspots</td>
+                </tr>
+                <tr>
+                    <td>Policy Makers</td>
+                    <td>Inform regional funding allocations and prevention strategies</td>
+                </tr>
+                <tr>
+                    <td>Medical Providers</td>
+                    <td>Identify high-risk areas for naloxone distribution and treatment facilities</td>
+                </tr>
+                <tr>
+                    <td>Researchers</td>
+                    <td>Guide further investigation into socioeconomic factors driving spatial patterns</td>
+                </tr>
+            </table>
+            
+            <div class="takeaway">
+                <h3>Visualization Takeaway</h3>
+                <p>The heatmap powerfully demonstrates that overdose deaths are not evenly distributed across Connecticut but instead cluster in specific urban centers while showing concerning growth in rural areas. This spatial analysis suggests that while population density is a factor, other elements like economic conditions, access to treatment, and drug distribution networks likely contribute to these geographical patterns. The immediate visual impact of the color gradient makes clear which regions require urgent intervention, while the interactive elements allow professionals to explore specific county data for targeted planning.</p>
+            </div>
+        </div>
     </section>
 </body>
 </html>
