@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Distribution by Sex</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+        #chart {
+            margin-bottom: 20px;
+        }
+        #analysis {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Age Distribution by Sex</h1>
+    <div id="chart"></div>
+    
+    <div id="analysis">
+        <h2>Analysis of Age Distribution by Sex</h2>
+        <p>
+            This graph illustrates the age distribution of individuals in our dataset that have overdosed in the state of Connecticut, segmented by their sex. The 'Age' feature is represented on the x-axis, and the number of occurrences for each age group is on the y-axis. Males are shown in blue, females in pink, and any unknown or unclassified entries (marked as "Unknown" or "X") are represented in gray.
+        </p>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
