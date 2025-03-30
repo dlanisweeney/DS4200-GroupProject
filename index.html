@@ -221,5 +221,99 @@
             </div>
         </div>
     </section>
+
+    <section id="overdoses map">
+        <h2>Connecticut Overdose GeoMap</h2>
+        <div class="visualization-container">
+            <iframe src="geograph.html" width="100%" height="600" frameborder="0"></iframe>
+        </div>
+        
+        <div class="analysis">
+            <h3>Data Interpretation</h3>
+            <p>The interactive map allows us to see what areas of Connecticut were having high amounts of overdoes from 2012-2023:</p>
+            <ul>
+                <li>Similar to the previous graph, we see that the cities have the largest amounts of overdoes, with the New Britain and Hartford areas having the most. </li>
+            </ul>
+            
+            <h3>Professional Applications</h3>
+            <p>This graph serves multiple stakeholders:</p>
+            <table class="stakeholder-table">
+                <tr>
+                    <th>Stakeholder</th>
+                    <th>Application</th>
+                </tr>
+                <tr>
+                    <td>Public Health Officials</td>
+                    <td>Target harm reduction resources to certain areas. Graph also shows what drugs were in the persons system which can also help with choosing resources.</td>
+                </tr>
+                <tr>
+                    <td>Policy Makers</td>
+                    <td>Inform regional funding allocations and strategies, graph can also highlight the groups of the population that are highest risk.</td>
+                </tr>
+            </table>
+            
+            <div class="takeaway">
+                <h3>Visualization Takeaway</h3>
+                <p>This interactive map visualizes individual overdose incidents geographically, with markers representing the location that the overdose occured. The graph is best when you interact with it and explore how the overdoses in each area varies by age, sex, and drugs in the individual's system.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="alt1">
+        <h2>Overdoses by Year and Race</h2>
+        <div class="visualization-container">
+            <iframe src="altgraph.html" width="100%" height="300" frameborder="0"></iframe>
+        </div>
+        
+        <div class="analysis">
+            <h3>Data Interpretation</h3>
+            <p>The interactive map allows us to see how overdoses have changed from 2012-2023 based on race:</p>
+            <ul>
+                <li><strong>2021</strong> saw a peak in overdoses for both white and black residents</li>
+                <li><strong>White residents</strong> have the highest counts of overdoses, with Black or African Americans residents having the second most</li>
+            </ul>
+            
+            <div class="takeaway">
+                <h3>Visualization Takeaway</h3>
+                <p>This map provides insights into how overdoses have evolved. It also allows us to select different years to see specifically how each race differed in overdoses. The graph demonstrates a rise in overdoses in 2018 that continued into 2021 and slighly decreased until 2023.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="alt2">
+        <h2>Overdoses by Year and Race</h2>
+        <div class="visualization-container">
+            <iframe src="alt2graph.html" width="100%" height="600" frameborder="0"></iframe>
+        </div>
+        
+        <div class="analysis">
+            <h3>Data Interpretation</h3>
+            <p>The interactive map allows us to see how overdoses have changed from 2012-2023 based on sex and age:</p>
+            <ul>
+                <li><strong>Year:</strong> 2021 saw a peak in overdoses for both gender</li>
+                <li><strong>Gender:</strong> Men on average have higher rates of overdoses than women</li>
+                <li><strong>Age:</strong> both men and women between the ages of 33 and 38 saw the highest rates of overdoses</li>
+            </ul>
+            
+            <div class="takeaway">
+                <h3>Visualization Takeaway</h3>
+                <p>This map provides insights into how overdoses have evolved based on sex and age. We see on average men have more overdoses than woman and that they both followed similar patterns (of increases and decreases) throughout the years. The age distribution changes throughout the years, for example: from 2021-2023, individuals who were 55 saw the highest rates of overdoses.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="d3graph">
+        <h2>Age Distribution by Sex</h2>
+        <div class="visualization-container">
+            <div id="chart"></div>
+        </div>
+        <div class="analysis"></div>
+        <div class="takeaway">
+            <h3>Visualization Takeaway</h3>
+            <p>This graph illustrates the age distribution of individuals in our dataset that have overdosed in Connecticut, segmented by sex. Males are shown in blue, females in pink, and unknown classifications in gray.</p>
+        </div>
+    </section>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
