@@ -176,7 +176,8 @@ document.addEventListener("DOMContentLoaded", function () {
             });
     });
     renderTimeTrendChart();
-
+    renderDrugCountsChart();
+    renderTimeTrendChart();
 
 function renderTimeTrendChart() {
     const margin = { top: 20, right: 30, bottom: 50, left: 60 };
@@ -259,99 +260,235 @@ function renderTimeTrendChart() {
     }).catch(error => console.error('Error loading yearly trends data:', error));
 }
 
-// function renderDrugChart() {
-//     const margin = { top: 20, right: 30, bottom: 100, left: 60 };
-//     const width = 800 - margin.left - margin.right;
-//     const height = 500 - margin.top - margin.bottom;
+function renderDrugCountsChart() {
+    const margin = { top: 20, right: 30, bottom: 100, left: 60 };
+    const width = 800 - margin.left - margin.right;
+    const height = 500 - margin.top - margin.bottom;
     
-//     // Select the container and clear any existing content
-//     const container = d3.select("#drug-chart");
-//     container.selectAll("*").remove();
+    // Select the container and clear any existing content
+    const container = d3.select("#drug-chart");
+    container.selectAll("*").remove();
 
-//     // Create SVG container
-//     const svg = container.append("svg")
-//         .attr("width", width + margin.left + margin.right)
-//         .attr("height", height + margin.top + margin.bottom)
-//         .append("g")
-//         .attr("transform", `translate(${margin.left},${margin.top})`);
+    // Create SVG container
+    const svg = container.append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", `translate(${margin.left},${margin.top})`);
 
-//     // Create tooltip
-//     const tooltip = d3.select("body").append("div")
-//         .attr("class", "tooltip")
-//         .style("position", "absolute")
-//         .style("visibility", "hidden")
-//         .style("background", "lightgray")
-//         .style("padding", "5px")
-//         .style("border-radius", "5px");
+    // Create tooltip
+    const tooltip = d3.select("body").append("div")
+        .attr("class", "tooltip")
+        .style("position", "absolute")
+        .style("visibility", "hidden")
+        .style("background", "rgba(0,0,0,0.7)")
+        .style("color", "white")
+        .style("padding", "8px")
+        .style("border-radius", "4px")
+        .style("font-size", "14px");
 
-//     // Load and process data
-//     d3.csv("drug_counts.csv").then(data => {
-//         if (!data || data.length === 0) {
-//             console.error("CSV data is empty or failed to load.");
-//             return;
-//         }
+    // Sample data - replace this with your actual data loading
+    const data = [
+        { Drug: "Fentanyl", Count: 8500 },
+        { Drug: "Heroin", Count: 6500 },
+        { Drug: "Cocaine", Count: 4500 },
+        { Drug: "Oxycodone", Count: 1800 },
+        { Drug: "Methadone", Count: 1200 }
+    ];
 
-//         // Process data
-//         data.forEach(d => {
-//             d.Count = +d.Count;
-//         });
+    // Create scales
+    const x = d3.scaleBand()
+        .domain(data.map(d => d.Drug))
+        .range([0, width])
+        .padding(0.2);
 
-//         // Sort data by count (descending)
-//         data.sort((a, b) => b.Count - a.Count);
+    const y = d3.scaleLinear()
+        .domain([0, d3.max(data, d => d.Count)])
+        .range([height, 0]);
 
-//         // Create scales
-//         const x = d3.scaleBand()
-//             .domain(data.map(d => d.Drug))
-//             .range([0, width])
-//             .padding(0.2);
+    // Add axes
+    svg.append("g")
+        .attr("transform", `translate(0, ${height})`)
+        .call(d3.axisBottom(x))
+        .selectAll("text")
+        .attr("transform", "rotate(-45)")
+        .style("text-anchor", "end")
+        .style("font-size", "12px");
 
-//         const y = d3.scaleLinear()
-//             .domain([0, d3.max(data, d => d.Count)])
-//             .range([height, 0]);
+    svg.append("g")
+        .call(d3.axisLeft(y))
+        .style("font-size", "12px");
 
-//         // Draw axes
-//         svg.append("g")
-//             .attr("transform", `translate(0, ${height})`)
-//             .call(d3.axisBottom(x))
-//             .selectAll("text")
-//             .attr("transform", "rotate(-45)")
-//             .style("text-anchor", "end")
-//             .attr("dy", "0.5em");
+    // Add y-axis label
+    svg.append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 0 - margin.left)
+        .attr("x", 0 - (height / 2))
+        .attr("dy", "1em")
+        .style("text-anchor", "middle")
+        .text("Number of Cases");
 
-//         svg.append("g")
-//             .call(d3.axisLeft(y));
+    // Create bars
+    svg.selectAll(".bar")
+        .data(data)
+        .enter()
+        .append("rect")
+        .attr("class", "bar")
+        .attr("x", d => x(d.Drug))
+        .attr("y", d => y(d.Count))
+        .attr("width", x.bandwidth())
+        .attr("height", d => height - y(d.Count))
+        .attr("fill", "#e74c3c")
+        .on("mouseover", function(event, d) {
+            d3.select(this).attr("fill", "#c0392b");
+            tooltip.style("visibility", "visible")
+                .html(`<strong>${d.Drug}</strong><br>${d.Count.toLocaleString()} cases`);
+        })
+        .on("mousemove", function(event) {
+            tooltip.style("top", (event.pageY - 10) + "px")
+                .style("left", (event.pageX + 10) + "px");
+        })
+        .on("mouseout", function() {
+            d3.select(this).attr("fill", "#e74c3c");
+            tooltip.style("visibility", "hidden");
+        });
 
-//         // Draw bars with tooltips
-//         svg.selectAll(".bar")
-//             .data(data)
-//             .join("rect")
-//             .attr("class", "bar")
-//             .attr("x", d => x(d.Drug))
-//             .attr("y", d => y(d.Count))
-//             .attr("width", x.bandwidth())
-//             .attr("height", d => height - y(d.Count))
-//             .attr("fill", "steelblue")
-//             .on("mouseover", (event, d) => {
-//                 tooltip.style("visibility", "visible")
-//                     .text(`${d.Drug}: ${d.Count} cases`);
-//             })
-//             .on("mousemove", (event) => {
-//                 tooltip.style("top", (event.pageY - 10) + "px")
-//                     .style("left", (event.pageX + 10) + "px");
-//             })
-//             .on("mouseout", () => {
-//                 tooltip.style("visibility", "hidden");
-//             });
+    // Add title
+    svg.append("text")
+        .attr("x", width / 2)
+        .attr("y", 0 - (margin.top / 2))
+        .attr("text-anchor", "middle")
+        .style("font-size", "16px")
+        .style("font-weight", "bold")
+}
 
-//         // Add value labels
-//         svg.selectAll(".label")
-//             .data(data)
-//             .join("text")
-//             .attr("class", "label")
-//             .attr("x", d => x(d.Drug) + x.bandwidth() / 2)
-//             .attr("y", d => y(d.Count) - 5)
-//             .attr("text-anchor", "middle")
-//             .text(d => d.Count);
+function renderTimeTrendChart() {
+    const margin = { top: 30, right: 30, bottom: 70, left: 60 };
+    const width = 800 - margin.left - margin.right;
+    const height = 500 - margin.top - margin.bottom;
+    
+    // Select the container and clear any existing content
+    const container = d3.select("#trend-chart");
+    container.selectAll("*").remove();
 
-//     }).catch(error => console.error('Error loading drug counts data:', error));
-// }
+    // Create SVG container
+    const svg = container.append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", `translate(${margin.left},${margin.top})`);
+
+    // Create tooltip
+    const tooltip = d3.select("body").append("div")
+        .attr("class", "tooltip")
+        .style("position", "absolute")
+        .style("visibility", "hidden")
+        .style("background", "rgba(0,0,0,0.7)")
+        .style("color", "white")
+        .style("padding", "8px")
+        .style("border-radius", "4px")
+        .style("font-size", "14px");
+
+    // Sample data - replace this with your actual data loading
+    const data = [
+        { Year: 2012, Cases: 650 },
+        { Year: 2013, Cases: 720 },
+        { Year: 2014, Cases: 780 },
+        { Year: 2015, Cases: 820 },
+        { Year: 2016, Cases: 1050 },
+        { Year: 2017, Cases: 1350 },
+        { Year: 2018, Cases: 1550 },
+        { Year: 2019, Cases: 1750 },
+        { Year: 2020, Cases: 2200 },
+        { Year: 2021, Cases: 2500 },
+        { Year: 2022, Cases: 2400 },
+        { Year: 2023, Cases: 2300 }
+    ];
+
+    // Create scales
+    const x = d3.scaleLinear()
+        .domain([d3.min(data, d => d.Year), d3.max(data, d => d.Year)])
+        .range([0, width]);
+
+    const y = d3.scaleLinear()
+        .domain([0, d3.max(data, d => d.Cases) * 1.1])
+        .range([height, 0]);
+
+    // Add grid lines
+    svg.append("g")
+        .attr("class", "grid")
+        .call(d3.axisLeft(y)
+            .tickSize(-width)
+            .tickFormat("")
+        )
+        .style("stroke", "#ddd")
+        .style("stroke-opacity", 0.5);
+
+    // Add axes
+    svg.append("g")
+        .attr("transform", `translate(0, ${height})`)
+        .call(d3.axisBottom(x).ticks(data.length).tickFormat(d3.format("d")))
+        .style("font-size", "12px");
+
+    svg.append("g")
+        .call(d3.axisLeft(y))
+        .style("font-size", "12px");
+
+    // Add y-axis label
+    svg.append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 0 - margin.left)
+        .attr("x", 0 - (height / 2))
+        .attr("dy", "1em")
+        .style("text-anchor", "middle")
+        .text("Number of Cases");
+
+    // Create line generator
+    const line = d3.line()
+        .x(d => x(d.Year))
+        .y(d => y(d.Cases))
+        .curve(d3.curveMonotoneX);
+
+    // Draw the line
+    svg.append("path")
+        .datum(data)
+        .attr("fill", "none")
+        .attr("stroke", "#3498db")
+        .attr("stroke-width", 3)
+        .attr("d", line);
+
+    // Add circles for each data point
+    svg.selectAll(".dot")
+        .data(data)
+        .enter()
+        .append("circle")
+        .attr("class", "dot")
+        .attr("cx", d => x(d.Year))
+        .attr("cy", d => y(d.Cases))
+        .attr("r", 6)
+        .attr("fill", "#3498db")
+        .attr("stroke", "white")
+        .attr("stroke-width", 2)
+        .on("mouseover", function(event, d) {
+            d3.select(this).attr("fill", "#2980b9");
+            tooltip.style("visibility", "visible")
+                .html(`<strong>${d.Year}</strong><br>${d.Cases.toLocaleString()} cases`);
+        })
+        .on("mousemove", function(event) {
+            tooltip.style("top", (event.pageY - 10) + "px")
+                .style("left", (event.pageX + 10) + "px");
+        })
+        .on("mouseout", function() {
+            d3.select(this).attr("fill", "#3498db");
+            tooltip.style("visibility", "hidden");
+        });
+
+    // Add title
+    svg.append("text")
+        .attr("x", width / 2)
+        .attr("y", 0 - (margin.top / 2))
+        .attr("text-anchor", "middle")
+        .style("font-size", "16px")
+        .style("font-weight", "bold")
+        .text("Connecticut Overdose Cases by Year");
+}
