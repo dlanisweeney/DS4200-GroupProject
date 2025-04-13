@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    font-size: 1.2rem; /* Base font size */
+    font-size: 1.6rem;
     margin: 40px;
     background-color: #f9f9f9;
     color: #333;
@@ -14,11 +14,11 @@ header {
 
 h1 {
     color: #0056b3;
-    font-size: 3rem;
+    font-size: 3.4rem;
 }
 
 p {
-    font-size: 1.3rem;
+    font-size: 1.6rem;
 }
 
 section {
@@ -51,19 +51,19 @@ ul {
 
 li {
     margin-bottom: 10px;
-    font-size: 1.2rem; /* Increase list font size */
+    font-size: 2rem;
 }
 
 @media (max-width: 600px) {
     body {
-        margin: 40px; /* Increased from 30px for better spacing */
+        margin: 40px;
     }
 
     h1 {
-        font-size: 2.2rem;
+        font-size: 3rem;
     }
 
     p, li {
-        font-size: 1.8rem;
+        font-size: 2.2rem;
     }
 }
