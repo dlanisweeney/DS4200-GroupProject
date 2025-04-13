@@ -261,11 +261,11 @@ function renderDrugCountsChart() {
         .style("font-size", "14px");
 
     const data = [
-        { Drug: "Fentanyl", Count: 8500 },
-        { Drug: "Heroin", Count: 6500 },
-        { Drug: "Cocaine", Count: 4500 },
-        { Drug: "Oxycodone", Count: 1800 },
-        { Drug: "Methadone", Count: 1200 }
+        { Drug: "Fentanyl", Count: 7342 },
+        { Drug: "Heroin", Count: 2667 },
+        { Drug: "Cocaine", Count: 3816 },
+        { Drug: "Oxycodone", Count: 743 },
+        { Drug: "Methadone", Count: 891 }
     ];
 
     // // Count drug occurrences
