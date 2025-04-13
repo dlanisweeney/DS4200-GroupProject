@@ -269,20 +269,6 @@ function renderDrugCountsChart() {
         { Drug: "Methadone", Count: 891 }
     ];
 
-    // // Count drug occurrences
-    // const drugCounts = {};
-    // rawData.forEach(entry => {
-    //     entry.drugs.forEach(drug => {
-    //         drugCounts[drug] = (drugCounts[drug] || 0) + 1;
-    //     });
-    // });
-
-    // // Convert to array format for D3
-    // const data = Object.keys(drugCounts).map(drug => ({
-    //     Drug: drug,
-    //     Count: drugCounts[drug]
-    // }));
-
     // Create scales
     const x = d3.scaleBand()
         .domain(data.map(d => d.Drug))
