@@ -260,7 +260,6 @@ function renderDrugCountsChart() {
         .style("border-radius", "4px")
         .style("font-size", "14px");
 
-    // Sample data - replace this with your actual data loading
     const data = [
         { Drug: "Fentanyl", Count: 8500 },
         { Drug: "Heroin", Count: 6500 },
