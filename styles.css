@@ -1,5 +1,6 @@
 body {
     font-family: Arial, sans-serif;
+    font-size: 1.2rem; /* Base font size */
     margin: 40px;
     background-color: #f9f9f9;
     color: #333;
@@ -50,18 +51,19 @@ ul {
 
 li {
     margin-bottom: 10px;
+    font-size: 1.2rem; /* Increase list font size */
 }
 
 @media (max-width: 600px) {
     body {
-        margin: 30px;
+        margin: 40px; /* Increased from 30px for better spacing */
     }
 
     h1 {
-        font-size: 2rem;
+        font-size: 2.2rem;
     }
 
     p, li {
-        font-size: 2rem;
+        font-size: 1.8rem;
     }
-} 
+}
