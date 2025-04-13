@@ -261,6 +261,7 @@ function renderDrugCountsChart() {
         .style("font-size", "14px");
 
     const data = [
+        { Drug: "Any Opioid", Count: 8227 },
         { Drug: "Fentanyl", Count: 7342 },
         { Drug: "Heroin", Count: 2667 },
         { Drug: "Cocaine", Count: 3816 },
