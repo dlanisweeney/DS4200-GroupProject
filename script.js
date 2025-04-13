@@ -260,13 +260,27 @@ function renderDrugCountsChart() {
         .style("border-radius", "4px")
         .style("font-size", "14px");
 
-    const data = [
-        { Drug: "Fentanyl", Count: 8500 },
-        { Drug: "Heroin", Count: 6500 },
-        { Drug: "Cocaine", Count: 4500 },
-        { Drug: "Oxycodone", Count: 1800 },
-        { Drug: "Methadone", Count: 1200 }
-    ];
+    // const data = [
+    //     { Drug: "Fentanyl", Count: 8500 },
+    //     { Drug: "Heroin", Count: 6500 },
+    //     { Drug: "Cocaine", Count: 4500 },
+    //     { Drug: "Oxycodone", Count: 1800 },
+    //     { Drug: "Methadone", Count: 1200 }
+    // ];
+
+    // Count drug occurrences
+    const drugCounts = {};
+    rawData.forEach(entry => {
+        entry.drugs.forEach(drug => {
+            drugCounts[drug] = (drugCounts[drug] || 0) + 1;
+        });
+    });
+
+    // Convert to array format for D3
+    const data = Object.keys(drugCounts).map(drug => ({
+        Drug: drug,
+        Count: drugCounts[drug]
+    }));
 
     // Create scales
     const x = d3.scaleBand()
