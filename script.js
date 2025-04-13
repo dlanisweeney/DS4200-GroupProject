@@ -260,27 +260,27 @@ function renderDrugCountsChart() {
         .style("border-radius", "4px")
         .style("font-size", "14px");
 
-    // const data = [
-    //     { Drug: "Fentanyl", Count: 8500 },
-    //     { Drug: "Heroin", Count: 6500 },
-    //     { Drug: "Cocaine", Count: 4500 },
-    //     { Drug: "Oxycodone", Count: 1800 },
-    //     { Drug: "Methadone", Count: 1200 }
-    // ];
+    const data = [
+        { Drug: "Fentanyl", Count: 8500 },
+        { Drug: "Heroin", Count: 6500 },
+        { Drug: "Cocaine", Count: 4500 },
+        { Drug: "Oxycodone", Count: 1800 },
+        { Drug: "Methadone", Count: 1200 }
+    ];
 
-    // Count drug occurrences
-    const drugCounts = {};
-    rawData.forEach(entry => {
-        entry.drugs.forEach(drug => {
-            drugCounts[drug] = (drugCounts[drug] || 0) + 1;
-        });
-    });
+    // // Count drug occurrences
+    // const drugCounts = {};
+    // rawData.forEach(entry => {
+    //     entry.drugs.forEach(drug => {
+    //         drugCounts[drug] = (drugCounts[drug] || 0) + 1;
+    //     });
+    // });
 
-    // Convert to array format for D3
-    const data = Object.keys(drugCounts).map(drug => ({
-        Drug: drug,
-        Count: drugCounts[drug]
-    }));
+    // // Convert to array format for D3
+    // const data = Object.keys(drugCounts).map(drug => ({
+    //     Drug: drug,
+    //     Count: drugCounts[drug]
+    // }));
 
     // Create scales
     const x = d3.scaleBand()
@@ -375,22 +375,19 @@ function renderTimeTrendChart() {
         .style("border-radius", "4px")
         .style("font-size", "14px");
 
-    // Sample data - replace this with your actual data loading
+    
     const data = [
-        { Year: 2012, Cases: 650 },
-        { Year: 2013, Cases: 720 },
-        { Year: 2014, Cases: 780 },
-        { Year: 2015, Cases: 820 },
-        { Year: 2016, Cases: 1050 },
-        { Year: 2017, Cases: 1350 },
-        { Year: 2018, Cases: 1550 },
-        { Year: 2019, Cases: 1750 },
-        { Year: 2020, Cases: 2200 },
-        { Year: 2021, Cases: 2500 },
-        { Year: 2022, Cases: 2400 },
-        { Year: 2023, Cases: 2300 }
+        { Year: 2015, Cases: 702 },
+        { Year: 2016, Cases: 886 },
+        { Year: 2017, Cases: 969 },
+        { Year: 2018, Cases: 942 },
+        { Year: 2019, Cases: 1089 },
+        { Year: 2020, Cases: 1294 },
+        { Year: 2021, Cases: 1441 },
+        { Year: 2022, Cases: 1327 },
+        { Year: 2023, Cases: 1217 }
     ];
-
+    
     // Create scales
     const x = d3.scaleLinear()
         .domain([d3.min(data, d => d.Year), d3.max(data, d => d.Year)])
